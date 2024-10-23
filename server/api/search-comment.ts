@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { defineEventHandler, getQuery } from 'h3';
+import { defineEventHandler, getQuery } from 'h3'; 
 
 const prisma = new PrismaClient();
 
@@ -12,8 +12,9 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const result = await prisma.$queryRawUnsafe(
-      `SELECT * FROM GuestbookEntry WHERE comment LIKE '%${search}%'`
+    const result = await prisma.$queryRaw(
+      `SELECT * FROM GuestbookEntry WHERE comment LIKE $1`,
+      `%${search}%`
     );
 
     return result;

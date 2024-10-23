@@ -40,7 +40,6 @@
             <h3>{{ comment.name }}</h3>
             <small>{{ comment.email }}</small>
           </header>
-          <div v-html="comment.comment"></div>
         </article>
       </section>
     </div>
@@ -49,6 +48,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import DOMPurify from 'dompurify'
 
 const form = ref({
   name: '',
@@ -58,6 +58,10 @@ const form = ref({
 
 const comments = ref([])
 const searchQuery = ref('')
+
+const sanitizeComment = (comment) => {
+  return DOMPurify.sanitize(comment);
+}
 
 const fetchComments = async () => {
   try {
