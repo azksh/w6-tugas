@@ -40,6 +40,7 @@
             <h3>{{ comment.name }}</h3>
             <small>{{ comment.email }}</small>
           </header>
+          <div>{{sanitizeComment(comment.comment)}}</div>
         </article>
       </section>
     </div>
